@@ -18,10 +18,10 @@ conexionWeb *webInterface;
 
 DateTime *reloj;
 StaticJsonDocument<512> horaActual;
-StaticJsonDocument<512> post_ejemplo;
-StaticJsonDocument<1024> get_ejemplo;
+StaticJsonDocument<512> post_informe;
+StaticJsonDocument<1024> get_informe;
 
-const char *urlPost = "http://192.168.0.21/esp32-api/public/api/sensores";
+const char *urlPost = "http://192.168.1.75/api-invernadero/public/api/informe"; //cambia direccion ipconfi y nombre api
 const char *geturl = "http://192.168.0.21/app/public/api/resetpassword";
 
 void setup()
@@ -43,24 +43,28 @@ void loop()
   sumatoria++;
 
   horaActual.clear();
-  post_ejemplo.clear();
+  post_informe.clear();
   reloj->getTime();
 
   horaActual["hora"] = reloj->timeStringBuff;
   horaActual["Sumatoria"] = sumatoria;
 
-  post_ejemplo["sensor"] = "temperatura";
-  post_ejemplo["valor"] = random(30);
+//valores q se llenaran
+  post_informe["id_sensor"] = 150;
+  post_informe["fecha"]= "2020-07-09";
+  post_informe["hora"]=  "11:05:06";
+  post_informe["temperatura"] = random(30);
+  post_informe["humedad"] = random(8);
 
-  //webInterface->webPOST(post_ejemplo, urlPost);
+  webInterface->webPOST(post_informe, urlPost);  //descomentarla despues de que nos genere la ip de esp32
   //  webInterface->webGET(geturl);
-
-  deserializeJson(get_ejemplo, webInterface->POSTresponse);
-  serializeJsonPretty(get_ejemplo, Serial);
+delay(5000);
+  deserializeJson(get_informe, webInterface->POSTresponse);
+  serializeJsonPretty(get_informe, Serial);
   Serial.println("");
   Serial.println("");
   Serial.println("");
   Serial.println("");
   
-  // serializeJson(horaActual,Serial);
+  //serializeJson(horaActual,Serial);
 }

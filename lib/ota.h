@@ -1,7 +1,7 @@
 #include <arduino.h>
 
-const char *ssid = "INFINITUM7090";
-const char *passwrd = "VHNHPaeEkG";
+const char *ssid = "INFINITUM8007_2.4"; //cambia contraseña
+const char *passwrd = "dL7qPVxkBX";
 
 
 #if defined(ESP32_RTOS) && defined(ESP32)
