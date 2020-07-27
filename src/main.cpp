@@ -50,9 +50,9 @@ void loop()
   horaActual["Sumatoria"] = sumatoria;
 
 //valores q se llenaran
-  post_informe["id_sensor"] = 150;
-  post_informe["fecha"]= "2020-07-09";
-  post_informe["hora"]=  "11:05:06";
+  post_informe["id_sensor"] = 200;
+  post_informe["fecha"]= reloj->timeStringBuff; ///sera?
+  post_informe["hora"]= reloj->timeStringBuff;
   post_informe["temperatura"] = random(30);
   post_informe["humedad"] = random(8);
 
